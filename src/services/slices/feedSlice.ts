@@ -7,7 +7,7 @@ type TFeedsState = {
   total: number;
   totalToday: number;
   loading: boolean;
-  error: string | null | undefined;
+  error: string | null ;
 };
 
 const initialState: TFeedsState = {
@@ -18,7 +18,9 @@ const initialState: TFeedsState = {
   error: null
 };
 
-export const fetchFeeds = createAsyncThunk('feeds/fetchFeeds', getFeedsApi);
+export const fetchFeeds = createAsyncThunk(
+  'feeds/fetchFeeds', 
+  async () => await getFeedsApi());
 
 const feedSlice = createSlice({
   name: 'feed',
@@ -38,7 +40,7 @@ const feedSlice = createSlice({
       })
       .addCase(fetchFeeds.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message||'err';
       });
   }
 });

@@ -18,6 +18,9 @@ import { AppHeader,
   IngredientDetails
  } from '@components';
  import {ProtectedRoute} from '../protected-route'
+import { useEffect } from 'react';
+import { fetchUser } from '../../services/slices/userDataSlice';
+import { fetchIngredients } from '../../services/slices/burgerIngridientsSlise';
 
 const App = () => {
   const location = useLocation();
@@ -25,6 +28,11 @@ const App = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchUser());
+    dispatch(fetchIngredients());
+  }, [dispatch]);
+  
   return (
   <div className={styles.app}>
     <AppHeader />
