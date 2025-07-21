@@ -14,7 +14,6 @@ export const Profile: FC = () => {
     return <Preloader />;
   }
 
-  console.log(user)
   if (!user) {
     return null;
   }

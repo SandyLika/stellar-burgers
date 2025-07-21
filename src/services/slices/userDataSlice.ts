@@ -67,8 +67,8 @@ const userDataSlice = createSlice({
   name: 'userData',
   initialState,
   reducers: {
-    setAuthChecked: (state, action) => {
-      state.isAuthChecked = action.payload;
+    setUserChecked: (state) => {
+      state.isAuthChecked = true;
     }
   },
   extraReducers: (builder) => {
@@ -103,12 +103,10 @@ const userDataSlice = createSlice({
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.isAuthChecked = true;
         state.user = action.payload.user;
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
-        state.isAuthChecked = true;
         state.error = action.error.message ;
       })
       .addCase(updateUser.pending, (state) => {
@@ -138,5 +136,5 @@ const userDataSlice = createSlice({
   }
 });
 
-export const { setAuthChecked } = userDataSlice.actions;
+export const { setUserChecked } = userDataSlice.actions;
 export const userReducer = userDataSlice.reducer;

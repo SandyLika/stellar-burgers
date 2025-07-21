@@ -19,8 +19,10 @@ import { AppHeader,
  } from '@components';
  import {ProtectedRoute} from '../protected-route'
 import { useEffect } from 'react';
-import { fetchUser } from '../../services/slices/userDataSlice';
+import { fetchUser ,setUserChecked} from '../../services/slices/userDataSlice';
 import { fetchIngredients } from '../../services/slices/burgerIngridientsSlise';
+import { getCookie } from '../../utils/cookie';
+
 
 const App = () => {
   const location = useLocation();
@@ -29,7 +31,13 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
+    if(getCookie('accessToken')){
+      dispatch(fetchUser()).unwrap().finally(()=>{
+        dispatch(setUserChecked())
+      })
+    } else {
+      dispatch(setUserChecked())
+    }
     dispatch(fetchIngredients());
   }, [dispatch]);
   
@@ -131,3 +139,7 @@ const App = () => {
 };
 
 export default App;
+function isUserChecked(): any {
+  throw new Error('Function not implemented.');
+}
+
