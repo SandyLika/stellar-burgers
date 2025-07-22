@@ -107,7 +107,7 @@ const userDataSlice = createSlice({
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ;
+        state.error = action.error.message;
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
@@ -132,7 +132,7 @@ const userDataSlice = createSlice({
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      })
+      });
   }
 });
 

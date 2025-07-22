@@ -8,11 +8,14 @@ import { useParams } from 'react-router-dom';
 import { fetchOrderByNumber } from '../../services/slices/orderSlice';
 
 export const OrderInfo: FC = () => {
+  const orderData = useSelector(
+    (state: RootState) => state.orders.currentOrder
+  );
 
-  const orderData = useSelector((state: RootState) => state.orders.currentOrder);
-
-  const ingredients: TIngredient[] = useSelector((state: RootState) => state.ingredients.items);
-
+  const ingredients: TIngredient[] = useSelector(
+    (state: RootState) => state.ingredients.items
+  );
+  //console.log(orderData)
   const dispatch = useDispatch<AppDispatch>();
   const { num } = useParams<{ num: string }>();
 
@@ -63,7 +66,7 @@ export const OrderInfo: FC = () => {
       total
     };
   }, [orderData, ingredients]);
-
+  //console.log(orderInfo);
   if (!orderInfo) {
     return <Preloader />;
   }

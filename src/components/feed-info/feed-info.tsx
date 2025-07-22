@@ -14,7 +14,9 @@ const getOrders = (orders: TOrder[], status: string): number[] =>
 
 export const FeedInfo: FC = () => {
   //const orders: TOrder[] = useSelector((state: RootState) => state.orders.userOrders);
-  const { orders, total, totalToday } = useSelector( (state: RootState) => state.feeds);
+  const { orders, total, totalToday } = useSelector(
+    (state: RootState) => state.feeds
+  );
 
   const readyOrders = getOrders(orders, 'done');
 
@@ -24,12 +26,12 @@ export const FeedInfo: FC = () => {
   useEffect(() => {
     dispatch(fetchFeeds());
   }, [dispatch]);
-  
+
   return (
     <FeedInfoUI
       readyOrders={readyOrders}
       pendingOrders={pendingOrders}
-      feed={{total, totalToday}}
+      feed={{ total, totalToday }}
     />
   );
 };

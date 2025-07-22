@@ -12,20 +12,22 @@ export const Login: FC = () => {
   const error = useSelector((state: RootState) => state.user.error);
   const isLoading = useSelector((state: RootState) => state.user.loading);
 
-    if (isLoading) {
-      return <Preloader />;
-    }
+  if (isLoading) {
+    return <Preloader />;
+  }
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(loginUser({
-      email,
-      password
-    }))
+    dispatch(
+      loginUser({
+        email,
+        password
+      })
+    );
   };
 
   return (
     <LoginUI
-      errorText={error||''}
+      errorText={error || ''}
       email={email}
       setEmail={setEmail}
       password={password}

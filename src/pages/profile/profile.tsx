@@ -6,7 +6,7 @@ import { updateUser } from '../../services/slices/userDataSlice';
 import { AppDispatch, RootState } from '../../services/store';
 
 export const Profile: FC = () => {
-  const user = useSelector( (state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.user.user);
   const isLoading = useSelector((state: RootState) => state.user.loading);
   const dispatch = useDispatch<AppDispatch>();
 

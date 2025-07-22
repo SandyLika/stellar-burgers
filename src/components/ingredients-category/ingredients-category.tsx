@@ -11,7 +11,9 @@ export const IngredientsCategory = forwardRef<
 >(({ title, titleRef, ingredients }, ref) => {
   const burgerConstructor = {
     bun: useSelector((state: RootState) => state.constructorBurger.bun),
-    ingredients: useSelector((state: RootState) => state.constructorBurger.ingredients)
+    ingredients: useSelector(
+      (state: RootState) => state.constructorBurger.ingredients
+    )
   };
 
   const ingredientsCounters = useMemo(() => {

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction,nanoid } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit';
 import { TIngredient, TConstructorIngredient } from '../../utils/types';
 
 type TConstructorState = {
@@ -13,7 +13,7 @@ const initialState: TConstructorState = {
 
 const constructorBurgerSlice = createSlice({
   name: 'burgerConstructor',
-  initialState: initialState,  
+  initialState: initialState,
   reducers: {
     addIngredient: {
       reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
@@ -22,7 +22,7 @@ const constructorBurgerSlice = createSlice({
           : state.ingredients.push(action.payload);
       },
       prepare: (ingredient: TIngredient) => ({
-        payload: { ...ingredient, id: nanoid()}
+        payload: { ...ingredient, id: nanoid() }
       })
     },
     removeIngredient: (state, action: PayloadAction<string>) => {
@@ -32,24 +32,29 @@ const constructorBurgerSlice = createSlice({
     },
     moveIngredientUp: (state, action: PayloadAction<number>) => {
       if (action.payload > 0) {
-      [ state.ingredients[action.payload], 
-        state.ingredients[action.payload - 1]
-      ] = [
-        state.ingredients[action.payload - 1],
-        state.ingredients[action.payload] ];
+        [
+          state.ingredients[action.payload],
+          state.ingredients[action.payload - 1]
+        ] = [
+          state.ingredients[action.payload - 1],
+          state.ingredients[action.payload]
+        ];
       }
     },
     moveIngredientDown: (state, action: PayloadAction<number>) => {
       if (action.payload < state.ingredients.length - 1) {
-        [ state.ingredients[action.payload],
+        [
+          state.ingredients[action.payload],
           state.ingredients[action.payload + 1]
         ] = [
           state.ingredients[action.payload + 1],
-          state.ingredients[action.payload] ];
+          state.ingredients[action.payload]
+        ];
       }
     },
     resetConstructor: () => ({ ...initialState })
-}})
+  }
+});
 export const {
   addIngredient,
   removeIngredient,

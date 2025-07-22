@@ -1,4 +1,5 @@
-import { ConstructorPage,
+import {
+  ConstructorPage,
   Feed,
   Login,
   Register,
@@ -7,22 +8,17 @@ import { ConstructorPage,
   Profile,
   ProfileOrders,
   NotFound404
- } from '@pages';
+} from '@pages';
 import '../../index.css';
 import styles from './app.module.css';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from '../../services/store';
-import { AppHeader,
-  Modal,
-  OrderInfo,
-  IngredientDetails
- } from '@components';
- import {ProtectedRoute} from '../protected-route'
+import { AppHeader, Modal, OrderInfo, IngredientDetails } from '@components';
+import { ProtectedRoute } from '../protected-route';
 import { useEffect } from 'react';
-import { fetchUser ,setUserChecked} from '../../services/slices/userDataSlice';
+import { fetchUser, setUserChecked } from '../../services/slices/userDataSlice';
 import { fetchIngredients } from '../../services/slices/burgerIngridientsSlise';
 import { getCookie } from '../../utils/cookie';
-
 
 const App = () => {
   const location = useLocation();
@@ -31,20 +27,22 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(getCookie('accessToken')){
-      dispatch(fetchUser()).unwrap().finally(()=>{
-        dispatch(setUserChecked())
-      })
+    if (getCookie('accessToken')) {
+      dispatch(fetchUser())
+        .unwrap()
+        .finally(() => {
+          dispatch(setUserChecked());
+        });
     } else {
-      dispatch(setUserChecked())
+      dispatch(setUserChecked());
     }
     dispatch(fetchIngredients());
   }, [dispatch]);
-  
+
   return (
-  <div className={styles.app}>
-    <AppHeader />
-    <Routes location={backgroundLocation || location}>
+    <div className={styles.app}>
+      <AppHeader />
+      <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route
@@ -97,12 +95,7 @@ const App = () => {
         />
         <Route path='/feed/:number' element={<OrderInfo />} />
         <Route path='/ingredients/:id' element={<IngredientDetails />} />
-        <Route
-          path='/profile/orders/:number'
-          element={
-              <OrderInfo />
-          }
-        />
+        <Route path='/profile/orders/:number' element={<OrderInfo />} />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
 
@@ -134,12 +127,11 @@ const App = () => {
           />
         </Routes>
       )}
-  </div>
-  )
+    </div>
+  );
 };
 
 export default App;
 function isUserChecked(): any {
   throw new Error('Function not implemented.');
 }
-

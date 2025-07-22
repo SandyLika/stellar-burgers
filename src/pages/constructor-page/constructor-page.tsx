@@ -8,8 +8,9 @@ import { Preloader } from '../../components/ui';
 import { FC } from 'react';
 
 export const ConstructorPage: FC = () => {
-  const isIngredientsLoading = useSelector((state: RootState) =>
-    state.ingredients.isLoading);
+  const isIngredientsLoading = useSelector(
+    (state: RootState) => state.ingredients.isLoading
+  );
 
   return (
     <>

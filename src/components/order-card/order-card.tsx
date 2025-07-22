@@ -12,7 +12,9 @@ const maxIngredients = 6;
 export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const location = useLocation();
 
-  const ingredients: TIngredient[] = useSelector((state: RootState) => state.ingredients.items);
+  const ingredients: TIngredient[] = useSelector(
+    (state: RootState) => state.ingredients.items
+  );
 
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;

@@ -10,7 +10,7 @@ type TOrdersState = {
   currentOrder: TOrder | null;
   userOrders: TOrder[];
   loading: boolean;
-  error: string | null |undefined;
+  error: string | null | undefined;
 };
 
 export const initialState: TOrdersState = {
@@ -44,7 +44,7 @@ const ordersSlice = createSlice({
   reducers: {
     clearCurrentOrder: (state) => {
       state.currentOrder = null;
-     }
+    }
   },
   extraReducers: (builder) => {
     builder

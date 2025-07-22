@@ -7,7 +7,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
 
 export const BurgerIngredients: FC = () => {
-  const ingredients = useSelector((state: RootState) => state.ingredients.items);
+  const ingredients = useSelector(
+    (state: RootState) => state.ingredients.items
+  );
   const buns = ingredients.filter((i) => i.type === 'bun');
   const mains = ingredients.filter((i) => i.type === 'main');
   const sauces = ingredients.filter((i) => i.type === 'sauce');

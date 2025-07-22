@@ -13,9 +13,9 @@ export const Register: FC = () => {
   const error = useSelector((state: RootState) => state.user.error);
   const isLoading = useSelector((state: RootState) => state.user.loading);
 
-    if (isLoading) {
-      return <Preloader />;
-    }
+  if (isLoading) {
+    return <Preloader />;
+  }
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -23,13 +23,14 @@ export const Register: FC = () => {
       registerUser({
         email: email,
         name: userName,
-        password: password,
-      }))
+        password: password
+      })
+    );
   };
 
   return (
     <RegisterUI
-      errorText={error||''}
+      errorText={error || ''}
       email={email}
       userName={userName}
       password={password}
