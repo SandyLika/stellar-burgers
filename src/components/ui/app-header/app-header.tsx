@@ -18,23 +18,35 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         <div className={styles.menu_part_left}>
           <NavLink
             to='/'
-            className={`${styles.link} ${location.pathname === '/' ? styles.link_active : ''}`}
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.link_active}` : styles.link
+            }
           >
-            <BurgerIcon
-              type={location.pathname === '/' ? 'primary' : 'secondary'}
-            />
-            <p className='text text_type_main-default ml-2 mr-10'>
-              Конструктор
-            </p>
+            {({ isActive }) => (
+              <>
+                <BurgerIcon
+                  type={location.pathname === '/' ? 'primary' : 'secondary'}
+                />
+                <p className='text text_type_main-default ml-2 mr-10'>
+                  Конструктор
+                </p>
+              </>
+            )}
           </NavLink>
           <NavLink
             to='/feed'
-            className={`${styles.link} ${location.pathname === '/feed' ? styles.link_active : ''}`}
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.link_active}` : styles.link
+            }
           >
-            <ListIcon
-              type={location.pathname === '/feed' ? 'primary' : 'secondary'}
-            />
-            <p className='text text_type_main-default ml-2'>Лента заказов</p>
+            {({ isActive }) => (
+              <>
+                <ListIcon type={'primary'} />
+                <p className='text text_type_main-default ml-2'>
+                  Лента заказов
+                </p>
+              </>
+            )}
           </NavLink>
         </div>
         <div className={styles.logo}>
@@ -42,16 +54,18 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         </div>
         <NavLink
           to='/profile'
-          className={`${styles.link} ${location.pathname.startsWith('/profile') ? styles.link_active : ''}`}
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.link_active}` : styles.link
+          }
         >
-          <ProfileIcon
-            type={
-              location.pathname.startsWith('/profile') ? 'primary' : 'secondary'
-            }
-          />
-          <p className='text text_type_main-default ml-2'>
-            {userName || 'Личный кабинет'}
-          </p>
+          {({ isActive }) => (
+            <>
+              <ProfileIcon type={'primary'} />
+              <p className='text text_type_main-default ml-2'>
+                {userName || 'Личный кабинет'}
+              </p>
+            </>
+          )}
         </NavLink>
       </nav>
     </header>

@@ -1,18 +1,13 @@
 import { Preloader } from '@ui';
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../services/slices/userDataSlice';
-import { AppDispatch, RootState } from '../../services/store';
+import { RootState, useDispatch, useSelector } from '../../services/store';
 
 export const Profile: FC = () => {
   const user = useSelector((state: RootState) => state.user.user);
   const isLoading = useSelector((state: RootState) => state.user.loading);
-  const dispatch = useDispatch<AppDispatch>();
-
-  if (isLoading) {
-    return <Preloader />;
-  }
+  const dispatch = useDispatch();
 
   if (!user) {
     return null;
@@ -25,12 +20,13 @@ export const Profile: FC = () => {
   });
 
   useEffect(() => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      name: user?.name || '',
-      email: user?.email || '',
-      password: ''
-    }));
+    if (user) {
+      setFormValue({
+        name: user?.name || '',
+        email: user?.email || '',
+        password: ''
+      });
+    }
   }, [user]);
 
   const isFormChanged =
@@ -58,6 +54,10 @@ export const Profile: FC = () => {
       [e.target.name]: e.target.value
     }));
   };
+
+  if (isLoading) {
+    return <Preloader />;
+  }
 
   return (
     <ProfileUI

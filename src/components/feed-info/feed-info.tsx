@@ -2,8 +2,7 @@ import { FC, useEffect } from 'react';
 
 import { TOrder } from '@utils-types';
 import { FeedInfoUI } from '../ui/feed-info';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../services/store';
+import { RootState, useDispatch, useSelector } from '../../services/store';
 import { fetchFeeds } from '../../services/slices/feedSlice';
 
 const getOrders = (orders: TOrder[], status: string): number[] =>
@@ -22,7 +21,7 @@ export const FeedInfo: FC = () => {
 
   const pendingOrders = getOrders(orders, 'pending');
 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFeeds());
   }, [dispatch]);
