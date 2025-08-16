@@ -83,7 +83,7 @@ const userDataSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message|| 'err';
       })
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
@@ -95,7 +95,7 @@ const userDataSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message|| 'err';
       })
       .addCase(fetchUser.pending, (state) => {
         state.loading = true;
@@ -107,7 +107,7 @@ const userDataSlice = createSlice({
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message|| 'err';
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
@@ -119,7 +119,7 @@ const userDataSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message|| 'err';
       })
       .addCase(logoutUser.pending, (state) => {
         state.loading = true;
@@ -131,7 +131,7 @@ const userDataSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message|| 'err';
       });
   }
 });
