@@ -93,7 +93,7 @@ describe('Проверка constructorReducer', () => {
     };
 
     const result = constructorReducer(state, moveIngredientDown(1));
-    expect(result.ingredients[1].id).toBe("2");
+    expect(result.ingredients[0].id).toBe("2");
   });
 
   it('resetConstructor', () => {

@@ -1,8 +1,8 @@
 const url = 'http://localhost:4000';
-const bun = '[data-cy="643d69a5c3f7b9001cfa093c"]';
-const ingredient = '[data-cy="643d69a5c3f7b9001cfa0946"]';
+const bun = '[data-cy="1"]';
+const ingredient = '[data-cy="3"]';
 const modal = '[data-cy="modal"]';
-const constructor = '[data-testid="burger-constructor"]';
+const constructor = '[data-cy="burger-constructor"]';
 
 describe('Тестирование конструктора бургеров', () => {
   beforeEach(() => {
@@ -20,13 +20,28 @@ describe('Тестирование конструктора бургеров', (
   });
 
   describe('Добавление ингредиентов', () => {
+    // Проверяется, что конструктор пуст
+     cy.get('[data-cy="burger-constructor"]').should(
+      'not.contain',
+      'Краторная булка N-200i'
+    );
+    cy.get('[data-cy="burger-constructor"]').should(
+      'not.contain',
+      'Хрустящие минеральные кольца'
+    );
+
     // Находим и добавляем первый доступный ингредиент
-    cy.get(ingredient).first().find('button').click();
+    cy.get(bun).find('button').click();
+    cy.get(ingredient).find('button').click();
 
     // Проверяем, что ингредиент появился в конструкторе
     cy.get('[data-cy="burger-constructor"]').should(
-      'not.contain',
-      'Выберите булки'
+      'contain.test',
+      'Краторная булка N-200i'
+    );
+    cy.get('[data-cy="burger-constructor"]').should(
+      'contain.test',
+      'Хрустящие минеральные кольца'
     );
   });
 
@@ -35,16 +50,16 @@ describe('Тестирование конструктора бургеров', (
     cy.get(bun).should('exist');
     cy.get(ingredient).should('exist');
 
-    // Открываем модальное окно первого ингредиента
-    cy.get('[data-cy="ingredient-item"]')
-      .first()
-      .within(() => {
-        cy.get('a').click();
-      });
+    // Открываем модальное окно блочки
+    cy.get(bun).click();
 
     // Проверяем открытие модального окна
     cy.get(modal).should('be.visible');
     cy.contains('Детали ингредиента').should('exist');
+    cy.get(modal).should(
+      'contain.test', 
+      'Краторная булка N-200i'
+    );
 
     // Закрываем модальное окно
     cy.get('[data-cy="modal-close"]').click();
@@ -64,8 +79,9 @@ describe('Тестирование конструктора бургеров', (
     cy.contains('Оформить заказ').click();
 
     // Проверяем номер заказа
+    cy.get('[data-cy="order-number"]').should('be.visible');
     cy.get(modal).within(() => {
-      cy.get('[data-cy="orderNumber"]').should('contain.text', '');
+      cy.get('[data-cy="orderNumber"]').should('contain', '4');
     });
 
     // Закрывается модальное окно
